@@ -1,0 +1,24 @@
+{
+  "name": "baredux",
+  "version": "1.0.0",
+  "description": "simpler state management",
+  "main": "main.js",
+  "scripts": {
+    "test": "mocha -r esm tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DavidBruant/baredux.git"
+  },
+  "keywords": ["state", "state management", "redux", "alternative", "flux"],
+  "author": "David Bruant <bruant.d@gmail.com> (https://twitter.com/DavidBruant)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DavidBruant/baredux/issues"
+  },
+  "homepage": "https://github.com/DavidBruant/baredux#readme",
+  "dependencies": {
+    "esm": "^3.2.18",
+    "mocha": "^6.0.2"
+  }
+}
