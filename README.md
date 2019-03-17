@@ -1,10 +1,11 @@
 # baredux
 
-A simple state management library
+A simple JavaScript state management library
 
-the ideas behind baredux are heavily influenced by Redux, Vuex and Rematch, so if you're familiar with any of these, baredux should be easy to understand
+the ideas behind baredux are heavily influenced by [redux](http://redux.js.org/), [Vuex](http://vuex.vuejs.org/) and [Rematch](https://github.com/rematch/rematch), so if you're familiar with any of these, baredux should be easy to understand
 
-if you're new to JavaScript state management: welcome :-) this should be a simpler first step than any of the 3 libraries mentionned above
+if you're new to JavaScript state management: welcome :-)\
+this library should be a simpler first step than any of the 3 libraries mentionned above
 
 
 ## Install
@@ -27,7 +28,7 @@ const store = new Store({state: {}, mutations: {}})
 This library enables the creation of a **store**\
 a **store** contains a **state** and **mutations**\
 the **state** is data represented as JavaScript objects\
-**mutations** are the only way to modify the **state**\
+**mutations** are functions and should be the only way to modify the **state**\
 **mutations** must be synchronous\
 it is also possible to **subscribe** to the store to be told whenever the state has changed
 
@@ -57,19 +58,16 @@ subscribe(state => {
 ```
 
 
-### Connection with React
+### Connection with [React](http://reactjs.org/)
 
-(but like, also preact!)
+(but like, also [preact](https://preactjs.com/)!)
 
 ```js
 import {render} from 'react-dom'
 import {createElement} from 'react'
-import htm from 'htm'
 import Store from 'baredux'
 
 import TodoList from './components/TodoList'
-
-const html = htm.bind(createElement);
 
 // define the store
 const store = new Store({
@@ -102,7 +100,7 @@ store.subscribe(state => {
     const {todos, viewFilter} = state
 
     render(
-        html`<${TodoList} todos=${todos} viewFilter=${viewFilter} addTodo=${addTodo} setViewFilter=${setViewFilter}/>`,
+        createElement(TodoList, {todos, viewFilter, addTodo, setViewFilter}),
         document.querySelector('#react-container')
     )
 })
@@ -213,12 +211,15 @@ function fetchTodos(){
 
 ### Actual read-only state
 
-By design, this library does not provide the guarantee
+By design, this library does not provide the guarantee that the state is read-only
 
 You can get this guarantee yourself via one of two ways:
 - define the state as an immutable data structure using a library like [immutable.js](https://immutable-js.github.io/immutable-js/)
-- create TypeScript definitions that define the state from this library as deeply readonly. [Example](https://www.typescriptlang.org/play/#src=%2F%2F%20adapted%20from%20https%3A%2F%2Fgithub.com%2FMicrosoft%2FTypeScript%2Fpull%2F21316%23issue-164138025%0D%0A%0D%0Atype%20DeepReadonly%3CT%3E%20%3D%0D%0A%20%20%20%20T%20extends%20any[]%20%3F%20DeepReadonlyArray%3CT[number]%3E%20%3A%0D%0A%20%20%20%20T%20extends%20object%20%3F%20DeepReadonlyObject%3CT%3E%20%3A%0D%0A%20%20%20%20T%3B%0D%0A%0D%0Ainterface%20DeepReadonlyArray%3CT%3E%20extends%20ReadonlyArray%3CDeepReadonly%3CT%3E%3E%20{}%0D%0A%0D%0Atype%20DeepReadonlyObject%3CT%3E%20%3D%20{%0D%0A%20%20%20%20readonly%20[P%20in%20NonFunctionPropertyNames%3CT%3E]%3A%20DeepReadonly%3CT[P]%3E%3B%0D%0A}%3B%0D%0A%0D%0Atype%20NonFunctionPropertyNames%3CT%3E%20%3D%20{%20[K%20in%20keyof%20T]%3A%20T[K]%20extends%20Function%20%3F%20never%20%3A%20K%20}[keyof%20T]%3B%0D%0A%0D%0Aclass%20Part{%0D%0A%20%20%20%20id%20%3D%200%0D%0A%20%20%20%20name%20%3D%20'yo'%0D%0A%20%20%20%20subparts%20%3D%20[%0D%0A%20%20%20%20%20%20%20%20{id%3A%201}%2C%0D%0A%20%20%20%20%20%20%20%20{id%3A%202}%0D%0A%20%20%20%20]%0D%0A}%0D%0A%0D%0Afunction%20f10(part%3A%20DeepReadonly%3CPart%3E)%20{%0D%0A%20%20%20%20let%20name%20%3D%20part.name%3B%0D%0A%20%20%20%20let%20id%20%3D%20part.subparts[0].id%3B%0D%0A%0D%0A%20%20%20%20part.id%20%3D%20part.id%3B%20%20%2F%2F%20Error%0D%0A%20%20%20%20part.subparts[0]%20%3D%20part.subparts[0]%3B%20%20%2F%2F%20Error%0D%0A%20%20%20%20part.subparts[0].id%20%3D%20part.subparts[0].id%3B%20%20%2F%2F%20Error%0D%0A}%0D%0A)
-Maybe, at a future time, i'll provide this TypeScript definition. Maybe there will be a choice between several Type definition so everyone can use this library the way they like
+- create [TypeScript](http://typescriptlang.org/) definitions that define the state from this library as deeply readonly. [Example](https://www.typescriptlang.org/play/#src=%2F%2F%20adapted%20from%20https%3A%2F%2Fgithub.com%2FMicrosoft%2FTypeScript%2Fpull%2F21316%23issue-164138025%0D%0A%0D%0Atype%20DeepReadonly%3CT%3E%20%3D%0D%0A%20%20%20%20T%20extends%20any[]%20%3F%20DeepReadonlyArray%3CT[number]%3E%20%3A%0D%0A%20%20%20%20T%20extends%20object%20%3F%20DeepReadonlyObject%3CT%3E%20%3A%0D%0A%20%20%20%20T%3B%0D%0A%0D%0Ainterface%20DeepReadonlyArray%3CT%3E%20extends%20ReadonlyArray%3CDeepReadonly%3CT%3E%3E%20{}%0D%0A%0D%0Atype%20DeepReadonlyObject%3CT%3E%20%3D%20{%0D%0A%20%20%20%20readonly%20[P%20in%20NonFunctionPropertyNames%3CT%3E]%3A%20DeepReadonly%3CT[P]%3E%3B%0D%0A}%3B%0D%0A%0D%0Atype%20NonFunctionPropertyNames%3CT%3E%20%3D%20{%20[K%20in%20keyof%20T]%3A%20T[K]%20extends%20Function%20%3F%20never%20%3A%20K%20}[keyof%20T]%3B%0D%0A%0D%0Aclass%20Part{%0D%0A%20%20%20%20id%20%3D%200%0D%0A%20%20%20%20name%20%3D%20'yo'%0D%0A%20%20%20%20subparts%20%3D%20[%0D%0A%20%20%20%20%20%20%20%20{id%3A%201}%2C%0D%0A%20%20%20%20%20%20%20%20{id%3A%202}%0D%0A%20%20%20%20]%0D%0A}%0D%0A%0D%0Afunction%20f10(part%3A%20DeepReadonly%3CPart%3E)%20{%0D%0A%20%20%20%20let%20name%20%3D%20part.name%3B%0D%0A%20%20%20%20let%20id%20%3D%20part.subparts[0].id%3B%0D%0A%0D%0A%20%20%20%20part.id%20%3D%20part.id%3B%20%20%2F%2F%20Error%0D%0A%20%20%20%20part.subparts[0]%20%3D%20part.subparts[0]%3B%20%20%2F%2F%20Error%0D%0A%20%20%20%20part.subparts[0].id%20%3D%20part.subparts[0].id%3B%20%20%2F%2F%20Error%0D%0A}%0D%0A)
+
+Maybe, at a future time, i'll provide this TypeScript definition\
+
+Maybe there will be a choice between [a simple TypeScript definition](https://github.com/DavidBruant/baredux/issues/1) and [another TypeScript definition with deepReadonly state](https://github.com/DavidBruant/baredux/issues/2) so everyone can use this library the way they prefer and easily move from one to the other smoothly
 
 
 ### Deep mutation definition
@@ -303,6 +304,10 @@ console.log(store.state.count) // 1
 // WHOA!! Magic!
 ```
 
+### The store is an event emitter
+
+[(soon)](https://github.com/DavidBruant/baredux/issues/3)
+
 ### Comparison with redux
 
 (soon)
@@ -310,6 +315,8 @@ console.log(store.state.count) // 1
 ### Comparison with Vuex
 
 (soon)
+
+
 
 
 ## Motivation
