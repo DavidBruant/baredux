@@ -115,7 +115,7 @@ store.subscribe(state => {
 
 They are not called when the state data changes; the state data is not "watched"
 
-The subscribers are called regardless of whether the call to the mutation function actaully mutated the function\
+The subscribers are called regardless of whether the call to the mutation function actually mutated the state\
 The rationale is that the mutation function caller has access to the state and knows which mutuation they want to perform, so if they called the function, it is assumed they actually wanted to perform a mutation
 
 
