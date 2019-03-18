@@ -12,7 +12,12 @@ export default function Store({state: initialState, mutations}){
             callToSubscribersScheduled = true;
             Promise.resolve().then(() => {
                 for(const s of subscribers){
-                    try{ s(state) } catch{}
+                    try{ 
+                        s(state)
+                    }
+                    catch(e){
+                        console.error('subscriber error', e)
+                    }
                 }
                 callToSubscribersScheduled = false;
             })
