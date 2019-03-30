@@ -52,9 +52,14 @@ console.log(state.count) // 0
 
 mutations.increase(2)
 
+console.log(state.count) // 2
+
 subscribe(state => {
-    console.log(state.count) // 2
+    console.log(state.count)
 })
+
+mutations.increase(1)
+// the subscriber logs 3 
 ```
 
 
