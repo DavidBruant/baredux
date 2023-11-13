@@ -1,4 +1,11 @@
+//@ts-check
 
+/**
+ * @template State
+ * @template {import("./types").BareduxInputMutations<State>} Mutations
+ * @param { {state: State, mutations: Mutations} } _
+ * @returns {import("./types").BareduxStore<State, Mutations>}
+ */
 export default function Store({state: initialState, mutations}){
     
     let state = initialState;
@@ -33,7 +40,7 @@ export default function Store({state: initialState, mutations}){
                         return makeSubscribleMutationWrapper(mutations[name], [...propSequence, name])
                     }
                     else{
-                        throw new TypeError(`No ${name} property in \`mutations.${propSequence.join('.')}\``)
+                        throw new TypeError(`No ${name} property in 'mutations.${propSequence.join('.')}'`)
                     }
                 },
                 apply(mutations, thisArg, argList){
