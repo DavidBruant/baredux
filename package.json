@@ -19,8 +19,8 @@
     "alternative",
     "flux"
   ],
-  "author": "David Bruant <bruant.d@gmail.com> (https://twitter.com/DavidBruant)",
-  "license": "ISC",
+  "author": "David Bruant <davidbruant@protonmail.com>",
+  "license": "CC0-1.0",
   "bugs": {
     "url": "https://github.com/DavidBruant/baredux/issues"
   },

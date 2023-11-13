@@ -12,12 +12,12 @@ this library should be a simpler first step than any of the 3 libraries mentionn
 
 **In your JavaScript project:**
 
-`npm install github:DavidBruant/baredux`
+`npm install github:DavidBruant/baredux#v1.0.1`
 
 **Directly in the browser**
 
 ```js
-import Store from 'https://cdn.jsdelivr.net/gh/DavidBruant/baredux@master/main.js'
+import Store from 'https://cdn.jsdelivr.net/gh/DavidBruant/baredux@v1.0.1/main.js'
 
 const store = new Store({state: {}, mutations: {}})
 ```
@@ -357,18 +357,11 @@ Ideally, the state would be defensive by default, that is only mutations should 
 
 Mutation/actions should be importable for other modules
 
-
-
-
-
-
 ## Browser support
 
 modern browsers
 
-Maybe i'll do an IE11-compatible version if i need one
-
 
 ## Licence
 
-MIT
+Creative Commons Zero
