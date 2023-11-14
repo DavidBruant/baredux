@@ -12,12 +12,12 @@ this library should be a simpler first step than any of the 3 libraries mentionn
 
 **In your JavaScript project:**
 
-`npm install github:DavidBruant/baredux#v1.0.5`
+`npm install github:DavidBruant/baredux#v1.0.6`
 
 **Directly in the browser**
 
 ```js
-import Store from 'https://cdn.jsdelivr.net/gh/DavidBruant/baredux@v1.0.5/main.js'
+import Store from 'https://cdn.jsdelivr.net/gh/DavidBruant/baredux@v1.0.6/main.js'
 
 const store = new Store({state: {}, mutations: {}})
 ```
