@@ -39,7 +39,7 @@ import Store2 from 'baredux'
 }
 
 {
-    const s1 = Store2({
+    const s2 = Store2({
         state: {x: 1},
         mutations: {
             increment(state){
@@ -62,12 +62,12 @@ import Store2 from 'baredux'
         }
     })
 
-    const x = s1.state.x
+    const x = s2.state.x
     console.log(x)
 
-    const increment = s1.mutations.increment
+    const increment = s2.mutations.increment
     increment()
 
-    const add = s1.mutations.add
+    const add = s2.mutations.add
     add(37)
 }
