@@ -20,4 +20,4 @@ interface BareduxStore<State, InputMutations extends BareduxInputMutations<State
     subscribe: (subscriber: (state: State) => void) => (() => void)
 }
 
-export default function Store<State, Mutations>(state: State, Mutations: BareduxInputMutations<State>) : BareduxStore<State, Mutations>
+export default function Store<State, Mutations extends BareduxInputMutations<State>>({state: State, mutations: Mutations}) : BareduxStore<State, Mutations>
