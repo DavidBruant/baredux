@@ -3,24 +3,23 @@ type DeepReadonly<T> = {
     readonly [P in keyof T]: DeepReadonly<T[P]>;
 }
 
-interface BareduxInputMutations<State> {
+type BareduxInputMutations<State> = {
     [key: string]: (state: State, ...others: any[]) => void | State
 }
 
-type OmitFirstArg<F> = F extends (x: any, ...args: infer P) => any ? (...args: P) => ReturnType<F> : never;
+type OmitFirstArg<F> = F extends (x: any, ...args: infer Args) => any ? (...args: Args) => ReturnType<F> : never;
 
 // This only does one layer of mutations and does not go deep
 type BareduxOutputMutations<BareduxInputMutationsType> = {
     [Property in keyof BareduxInputMutationsType]: OmitFirstArg<BareduxInputMutationsType[Property]>
 }
 
-interface BareduxStore<State, InputMutations extends BareduxInputMutations<State>> {
+type BareduxStore<State, InputMutations extends BareduxInputMutations<State>> = {
     state: DeepReadonly<State>,
     mutations: BareduxOutputMutations<InputMutations>,
     subscribe: (subscriber: (state: State) => void) => (() => void)
 }
 
-export default function Store<State, Mutations extends BareduxInputMutations<State>>({ state, mutations }: {
-    state: State;
-    mutations: Mutations;
-}): BareduxStore<State, Mutations>
+export default function Store<State, Mutations extends BareduxInputMutations<State>>(
+    { state: State, mutations : Mutations }
+): BareduxStore<State, Mutations>
