@@ -3,6 +3,7 @@ type DeepReadonly<T> = {
     readonly [P in keyof T]: DeepReadonly<T[P]>;
 }
 
+// This only does one layer of mutations and does not go deep
 type BareduxInputMutations<State> = {
     [key: string]: (state: State, ...others: any[]) => void | State
 }
@@ -20,6 +21,6 @@ type BareduxStore<State, InputMutations extends BareduxInputMutations<State>> = 
     subscribe: (subscriber: (state: State) => void) => (() => void)
 }
 
-export default function Store<State, Mutations extends BareduxInputMutations<State>>(
-    { state: State, mutations : Mutations }
+export default function<State, Mutations extends BareduxInputMutations<State>>(
+    { state, mutations }: {state: State, mutations: Mutations}
 ): BareduxStore<State, Mutations>

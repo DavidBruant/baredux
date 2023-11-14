@@ -27,6 +27,10 @@
   "homepage": "https://github.com/DavidBruant/baredux#readme",
   "devDependencies": {
     "esm": "^3.2.18",
-    "mocha": "^6.0.2"
+    "mocha": "^6.0.2",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "baredux": "github:DavidBruant/baredux#v1.0.4"
   }
 }
