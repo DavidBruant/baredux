@@ -7,7 +7,7 @@ interface BareduxInputMutations<State> {
     [key: string]: (state: State, ...others: any[]) => void | State
 }
 
-type OmitFirstArg<F> = F extends (x: any, ...args: infer P) => any ? (...args: P) => ReturnType<F> | Promise<ReturnType<F>> : never;
+type OmitFirstArg<F> = F extends (x: any, ...args: infer P) => any ? (...args: P) => ReturnType<F> : never;
 
 // This only does one layer of mutations and does not go deep
 type BareduxOutputMutations<BareduxInputMutationsType> = {
@@ -20,4 +20,7 @@ interface BareduxStore<State, InputMutations extends BareduxInputMutations<State
     subscribe: (subscriber: (state: State) => void) => (() => void)
 }
 
-export default function Store<State, Mutations extends BareduxInputMutations<State>>({state: State, mutations: Mutations}) : BareduxStore<State, Mutations>
+export default function Store<State, Mutations extends BareduxInputMutations<State>>({ state, mutations }: {
+    state: State;
+    mutations: Mutations;
+}): BareduxStore<State, Mutations>
