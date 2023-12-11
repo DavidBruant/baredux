@@ -16,7 +16,7 @@ type BareduxOutputMutations<BareduxInputMutationsType> = {
 }
 
 type BareduxStore<State, InputMutations extends BareduxInputMutations<State>> = {
-    state: DeepReadonly<State>,
+    state: State,
     mutations: BareduxOutputMutations<InputMutations>,
     subscribe: (subscriber: (state: State) => void) => (() => void)
 }
