@@ -1,6 +1,6 @@
 {
   "name": "baredux",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "simpler state management",
   "main": "main.js",
   "type": "module",
