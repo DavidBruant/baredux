@@ -153,7 +153,7 @@ const store = new Store({
         // replace state
         increaseCount2(state){
             return {
-                count = state.count + 1
+                count: state.count + 1
             }
         }
     }
